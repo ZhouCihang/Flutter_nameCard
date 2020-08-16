@@ -1,7 +1,7 @@
 # name_card
 
 A new Flutter application.
-
+simple name card UI by using dart
 ## Getting Started
 
 This project is a starting point for a Flutter application.
