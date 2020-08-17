@@ -99,3 +99,12 @@ class NameCardBasic1 extends StatelessWidget{
     );
   }
 }
+
+class UserData{
+  final String name;
+  final String title;
+  final String address;
+  final String tel;
+
+  UserData(this.name, this.title, this.address, this.tel);
+}
