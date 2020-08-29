@@ -1,5 +1,5 @@
 class UserDetail {
-  int index;
+  String index;
   String name;
   String title;
   String address;

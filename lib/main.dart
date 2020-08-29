@@ -8,6 +8,8 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:path/path.dart';
 import 'DetailPage.dart';
+import 'UserList.dart';
+import 'UserDetail.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,21 +29,25 @@ class MyApp extends StatelessWidget {
 
 class NameCardBasic1 extends StatelessWidget {
 
-  Future<List<UserData>> _getUsers() async {
+  Future<List<UserList>> _getUsers() async {
  /*   var data = await http
         .get("http://www.json-generator.com/api/json/get/bVigOGpCUO?indent=2");*/
-    var data = await http.get("http://10.0.2.2:8000/full.json");
+    //var data = await http.get("http://10.0.2.2:8000/full.json");
+    var data = await http.get("http://10.0.2.2:8000/list.json");
     var jsonData = json.decode(data.body);
 
-    List<UserData> user = [];
+/*    List<UserData> user = [];
     for (var u in jsonData) {
       UserData userData =
           UserData(u["index"], u["name"], u["title"], u["address"], u["phone"]);
       user.add(userData);
-    }
+    }*/
 
-    //var listData = await rootBundle.loadString("Data/list.json");
-    //var jsonData1 = json.decode(listData);
+    List<UserList> user = [];
+    for (var u in jsonData) {
+      UserList userList = UserList(u["index"], u["name"]);
+      user.add(userList);
+    }
     print(user.length);
     return user;
   }
@@ -76,7 +82,7 @@ class NameCardBasic1 extends StatelessWidget {
                       return GestureDetector(
                         onTap: (){
                           Navigator.push(context,
-                            new MaterialPageRoute(builder: (context) => DetailPage(snapshot.data[index]))
+                            new MaterialPageRoute(builder: (context) => DetailPage(nameCardId: snapshot.data[index].index.toString()))
                           );
                         },
                         child: Container(
@@ -105,9 +111,6 @@ class NameCardBasic1 extends StatelessWidget {
                                           style:TextStyle(
                                           fontSize: 18,
                                         ),),
-                                        Text(snapshot.data[index].title, style:TextStyle(
-                                          fontSize: 12,
-                                        ),overflow: TextOverflow.fade)
                                       ],
                                     ),
                                   ),
@@ -130,7 +133,7 @@ class NameCardBasic1 extends StatelessWidget {
   }
 }
 
-class UserData {
+/*class UserData {
   final int index;
   final String name;
   final String title;
@@ -138,4 +141,4 @@ class UserData {
   final String phone;
 
   UserData(this.index, this.name, this.title, this.address, this.phone);
-}
+}*/

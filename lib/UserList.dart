@@ -1,5 +1,5 @@
 class UserList{
-  int index;
+  String index;
   String name;
 
   UserList(this.index, this.name);
