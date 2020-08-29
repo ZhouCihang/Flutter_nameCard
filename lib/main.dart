@@ -37,7 +37,6 @@ class NameCardBasic1 extends StatelessWidget {
     }
     //print("ABC");
     print(user.length);
-
     return user;
   }
 
