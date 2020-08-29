@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:core';
 
+import 'DetailPage.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -42,6 +44,9 @@ class NameCardBasic1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Name Card Content"),
+      ),
       body: Align(
         alignment: Alignment.center,
         child: Container(
@@ -98,10 +103,6 @@ class NameCardBasic1 extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              Text(snapshot.data[index].address),
-                              SizedBox(height: 12),
-                              Text(snapshot.data[index].phone)
                             ],
                           ),
                         ),
@@ -118,23 +119,6 @@ class NameCardBasic1 extends StatelessWidget {
     );
   }
 }
-
-class DetailPage extends StatelessWidget {
-
-  final UserData user;
-
-  DetailPage(this.user);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(user.name),
-      ),
-    );
-  }
-}
-
 
 class UserData {
   final int index;
