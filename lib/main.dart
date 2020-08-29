@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:name_card/UserList.dart';
 import 'dart:convert';
 import 'dart:core';
-
+import 'package:path/path.dart';
 import 'DetailPage.dart';
 
 void main() => runApp(MyApp());
@@ -24,9 +26,11 @@ class MyApp extends StatelessWidget {
 }
 
 class NameCardBasic1 extends StatelessWidget {
+
   Future<List<UserData>> _getUsers() async {
-    var data = await http
-        .get("http://www.json-generator.com/api/json/get/bVigOGpCUO?indent=2");
+ /*   var data = await http
+        .get("http://www.json-generator.com/api/json/get/bVigOGpCUO?indent=2");*/
+    var data = await http.get("http://10.0.2.2:8000/full.json");
     var jsonData = json.decode(data.body);
 
     List<UserData> user = [];
@@ -35,7 +39,9 @@ class NameCardBasic1 extends StatelessWidget {
           UserData(u["index"], u["name"], u["title"], u["address"], u["phone"]);
       user.add(userData);
     }
-    //print("ABC");
+
+    //var listData = await rootBundle.loadString("Data/list.json");
+    //var jsonData1 = json.decode(listData);
     print(user.length);
     return user;
   }
@@ -52,6 +58,11 @@ class NameCardBasic1 extends StatelessWidget {
           child: FutureBuilder(
             future: _getUsers(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasError) {
+                return Text("${snapshot.error.toString()}");
+              }
+
+
               if (snapshot.data == null) {
                 return Container(child: Center(child: Text("Loading...")));
               } else {
