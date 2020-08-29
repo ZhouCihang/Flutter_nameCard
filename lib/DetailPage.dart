@@ -44,10 +44,12 @@ class DetailPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(user.address,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),overflow: TextOverflow.fade),
+                  Flexible(
+                    child: Text(user.address,
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),overflow: TextOverflow.fade),
+                  ),
                   Text(user.phone,
                     style: TextStyle(
                       fontSize: 12,
