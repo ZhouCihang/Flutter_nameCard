@@ -68,7 +68,6 @@ class NameCardBasic1 extends StatelessWidget {
                 return Text("${snapshot.error.toString()}");
               }
 
-
               if (snapshot.data == null) {
                 return Container(child: Center(child: Text("Loading...")));
               } else {

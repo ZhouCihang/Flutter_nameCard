@@ -15,12 +15,14 @@ class DetailPage extends StatelessWidget {
 
   Future<UserDetail> _getUsers() async {
     var data = await http.get("http://10.0.2.2:8000/"+this.nameCardId+".json");
-    var jsonData = json.decode(data.body);
+    Map jsonData = json.decode(data.body);
+    //Map jsonData = jsonDecode(data);
+    var user = UserDetail.fromJson(jsonData);
 
-    
-    
+    //print(user.title);
     //UserDetail userDetail = UserDetail(jsonData["index"],jsonData["name"], jsonData["title"], jsonData["address"], jsonData["phone"]);
-    return UserDetail.fromJson(jsonData);
+    UserDetail userDetail = UserDetail(user.index, user.name, user.title, user.address,user.phone);
+    return userDetail;
   }
 
   @override
@@ -42,7 +44,6 @@ class DetailPage extends StatelessWidget {
               if (snapshot.data == null) {
                 return Container(child: Center(child: Text("Loading...")));
               } else{
-                print("ABC"+ snapshot.data);
                 return Container(
                   child: Column(
                     children: [
